@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>ML Char</title>
+    <meta name="github" content="github.com/rakesh4real/P2P-V2">
+    <meta name="author" content="Asapanna Rakesh <rakesh4real.github.io>">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/skeleton.min.css"/>
+    <link rel="stylesheet" href="assets/main.css"/>
+  </head>
+
+  <body>
+    <div id="heading">
+        <pre id="ghost-nation">
+        ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ███▄    █  ▄▄▄     ▄▄▄█████▓ ██▓ ▒█████   ███▄    █ 
+        ██▒ ▀█▒▓██░ ██▒▒██▒  ██▒▒██    ▒ ▓  ██▒ ▓▒    ██ ▀█   █ ▒████▄   ▓  ██▒ ▓▒▓██▒▒██▒  ██▒ ██ ▀█   █ 
+       ▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░   ▓██  ▀█ ██▒▒██  ▀█▄ ▒ ▓██░ ▒░▒██▒▒██░  ██▒▓██  ▀█ ██▒
+       ░▓█  ██▓░▓█ ░██ ▒██   ██░  ▒   ██▒░ ▓██▓ ░    ▓██▒  ▐▌██▒░██▄▄▄▄██░ ▓██▓ ░ ░██░▒██   ██░▓██▒  ▐▌██▒
+       ░▒▓███▀▒░▓█▒░██▓░ ████▓▒░▒██████▒▒  ▒██▒ ░    ▒██░   ▓██░ ▓█   ▓██▒ ▒██▒ ░ ░██░░ ████▓▒░▒██░   ▓██░
+        ░▒   ▒  ▒ ░░▒░▒░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░  ▒ ░░      ░ ▒░   ▒ ▒  ▒▒   ▓▒█░ ▒ ░░   ░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+         ░   ░  ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░▒  ░ ░    ░       ░ ░░   ░ ▒░  ▒   ▒▒ ░   ░     ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
+       ░ ░   ░  ░  ░░ ░░ ░ ░ ▒  ░  ░  ░    ░            ░   ░ ░   ░   ▒    ░       ▒ ░░ ░ ░ ▒     ░   ░ ░ 
+             ░  ░  ░  ░    ░ ░        ░                       ░       ░  ░         ░      ░ ░           ░ 
+                                                                                                                       
+        </pre>
+        <pre>*** Private P2P Network *** <br> Initiate connection - Copy & Send your payload to peer - Recieve & Paste your peer payload</pre>
+    </div>
+
+    <!-- connection -->
+    <div class="container">
+        <div class="row">
+          <div class="one-half column your-id-container">
+            <h5>Start Connection</h5>
+            <a href="#init"><button id="initiate-con">Initiate Connection</button></a>
+            <input id="yourId" placeholder="Your ID/Payload">
+          </div>
+          <div class="one-half column other-id-container">
+            <h5>Join Connection</h5>
+            <input id="otherId" placeholder="Paste peer's ID/Payload here"></input>
+            <button id="connect">Connect</button> 
+          </div>
+        </div>
+    </div>
+
+    <!-- vid -->
+    <div class="container">
+        <div class="row">
+          <div class="one-half column other-video-container">
+            <video id="other-video" width="300" height="200"></video>
+          </div>
+          <div class="one-half column my-video-containerr">
+            <video id="my-video" width="300" height="200"></video>
+          </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+    <!-- messaging -->
+    <div class="container">
+        <div class="row">
+          <div class="ten columns">
+            <input id="yourMsg" placeholder="write your message here ...">
+          </div>
+          <div class="two columns">
+            <button id="send">send</button>
+          </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <pre id="logs"></pre>
+        </div>
+    </div>
+
+    <!-- messaging -->
+
+
+    <script src="bundle.js" charset="utf-8"></script>
+  </body>
+</html>
