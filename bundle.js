@@ -92,7 +92,7 @@ navigator.webkitGetUserMedia({video:true, audio:false}, (stream)=>{
         // --------
         var myvideo = document.getElementById('my-video')
         myvideo.srcObject=stream;
-        video.addEventListener('loadeddata', dispSegmentationOnCanvas("my-canvas", "my-video"));
+        myvideo.addEventListener('loadeddata', dispSegmentationOnCanvas("my-canvas", "my-video"));
         myvideo.play()
     })
 
@@ -184,15 +184,6 @@ model = bodyPix.load(bodyPixProperties).then(function (loadedModel) {
 
 function dispSegmentationOnCanvas(canvasId, videoId) {
     
-    // configure bodypix
-    // -----------------
-    
-
-
-    // load model
-
-
-
     // A function to render returned segmentation data to a given canvas context.
     function processSegmentation(canvas, segmentation) {
         var ctx = canvas.getContext('2d');
