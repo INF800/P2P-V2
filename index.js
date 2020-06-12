@@ -24,7 +24,7 @@ navigator.webkitGetUserMedia({video:true, audio:false}, (stream)=>{
     p.on('signal', (data) => {
         document.getElementById('yourId').value = JSON.stringify(data)
         // `data` is your ID in json that need to be sent to other peer.
-        copy(data) // to clipboard
+        copy(JSON.stringify(data)) // to clipboard
     })
 
     // paste your ID in ANOTHER peer and connect by clicking `connect`
