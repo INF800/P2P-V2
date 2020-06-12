@@ -2,6 +2,25 @@
 // You have to think both in the shoes of peer1(you) as well as peer2(other)
 // similtaneously!
 
+var gn = document.getElementById('ghost-nation')
+if ( ( window.innerWidth > 800 ) && ( window.innerHeight > 600)) {
+    gn.style.fontSize = "10px"
+    gn.textContent = `
+    ▄████  ██░ ██  ▒█████    ██████ ▄▄▄█████▓    ███▄    █  ▄▄▄     ▄▄▄█████▓ ██▓ ▒█████   ███▄    █ 
+    ██▒ ▀█▒▓██░ ██▒▒██▒  ██▒▒██    ▒ ▓  ██▒ ▓▒    ██ ▀█   █ ▒████▄   ▓  ██▒ ▓▒▓██▒▒██▒  ██▒ ██ ▀█   █ 
+   ▒██░▄▄▄░▒██▀▀██░▒██░  ██▒░ ▓██▄   ▒ ▓██░ ▒░   ▓██  ▀█ ██▒▒██  ▀█▄ ▒ ▓██░ ▒░▒██▒▒██░  ██▒▓██  ▀█ ██▒
+   ░▓█  ██▓░▓█ ░██ ▒██   ██░  ▒   ██▒░ ▓██▓ ░    ▓██▒  ▐▌██▒░██▄▄▄▄██░ ▓██▓ ░ ░██░▒██   ██░▓██▒  ▐▌██▒
+   ░▒▓███▀▒░▓█▒░██▓░ ████▓▒░▒██████▒▒  ▒██▒ ░    ▒██░   ▓██░ ▓█   ▓██▒ ▒██▒ ░ ░██░░ ████▓▒░▒██░   ▓██░
+    ░▒   ▒  ▒ ░░▒░▒░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░  ▒ ░░      ░ ▒░   ▒ ▒  ▒▒   ▓▒█░ ▒ ░░   ░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+     ░   ░  ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░▒  ░ ░    ░       ░ ░░   ░ ▒░  ▒   ▒▒ ░   ░     ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
+   ░ ░   ░  ░  ░░ ░░ ░ ░ ▒  ░  ░  ░    ░            ░   ░ ░   ░   ▒    ░       ▒ ░░ ░ ░ ▒     ░   ░ ░ 
+         ░  ░  ░  ░    ░ ░        ░                       ░       ░  ░         ░      ░ ░           ░ 
+                                                                                                      `
+} else {
+    gn.textContent = `GHOST NATION`
+    gn.style.fontSize = "30px"
+}
+
 // remove/add  video stream by removing/adding 4 changes
 // video: **1of4** - get camera stream
 navigator.webkitGetUserMedia({video:true, audio:false}, (stream)=>{
@@ -25,7 +44,7 @@ navigator.webkitGetUserMedia({video:true, audio:false}, (stream)=>{
     p.on('signal', (data) => {
         document.getElementById('yourId').value = JSON.stringify(data)
         // `data` is your ID in json that need to be sent to other peer.
-        copy(SON.stringify(data)) // to clipboard
+        // !!someway copy to clipboard!!
     })
 
     // paste your ID in ANOTHER peer and connect by clicking `connect`
