@@ -1,0 +1,31 @@
+
+  video {
+    clear: both;
+    display: block;
+  }
+
+  .webcam-l {
+    position: relative;
+    float: left;
+    width: 48%;
+    margin: 2% 1%;
+    cursor: pointer;
+  }
+
+  .webcam-r {
+    position: relative;
+    float: right;
+    width: 48%;
+    margin: 2% 1%;
+    cursor: pointer;
+  }
+
+  /* We are overlaying canvas on video */
+  .canvas, .webcam canvas.overlay {
+    opacity: 0.66;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: green;
+    z-index: 2;
+  }
