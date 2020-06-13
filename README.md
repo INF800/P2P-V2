@@ -9,6 +9,7 @@
 - [x] Person Detection
 - [ ] Text Toxicity Detection
 - [ ] Text Auto Completion
+- [ ] Auto Mute
 - [ ] Screen Cast
 - [ ] Multiple Peers (Not full-mesh)
 
