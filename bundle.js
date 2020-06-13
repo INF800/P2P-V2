@@ -21,6 +21,7 @@ if ( ( window.innerWidth > 800 ) && ( window.innerHeight > 600)) {
     gn.style.fontSize = "30px"
 }
 
+// define dims for stream, video tag on loading stream, and canvas
 const VIDEO_AND_CANVAS_WIDTH  = 250
 const VIDEO_AND_CANVAS_HEIGHT = 180
 
@@ -224,7 +225,7 @@ function dispSegmentationOnCanvas(canvasId, videoId) {
     // define video tag you are processing
     video = document.getElementById(videoId)
 
-    // initiall will be zero. so resize!
+    // initially will be zero. so resize!
     // video.videoWidth not working
     if (video.srcObject.getVideoTracks()[0].getSettings().width === undefined){
         webcamCanvas.width = VIDEO_AND_CANVAS_WIDTH;
@@ -232,6 +233,7 @@ function dispSegmentationOnCanvas(canvasId, videoId) {
         videoRenderCanvas.width = VIDEO_AND_CANVAS_WIDTH;
         videoRenderCanvas.height = VIDEO_AND_CANVAS_HEIGHT;      
     } else {
+        // if as well as else work ALMOST same way
         webcamCanvas.width = video.srcObject.getVideoTracks()[0].getSettings().width;
         webcamCanvas.height = video.srcObject.getVideoTracks()[0].getSettings().height;
         videoRenderCanvas.width = video.srcObject.getVideoTracks()[0].getSettings().width;
@@ -261,6 +263,8 @@ function dispSegmentationOnCanvas(canvasId, videoId) {
         console.log("model not loaded");
     }
 
+    // unhide & start prdiction loop
+    document.getElementById(canvasId).style.display = "inline"
     predictWebcam()
 }
 },{"simple-peer":25}],2:[function(require,module,exports){
