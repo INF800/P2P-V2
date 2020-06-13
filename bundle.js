@@ -17,9 +17,11 @@ if ( ( window.innerWidth > 800 ) && ( window.innerHeight > 600)) {
          ░  ░  ░  ░    ░ ░        ░                       ░       ░  ░         ░      ░ ░           ░ 
                                                                                                       `
 } else {
-    gn.textContent = `GHOST NATION`
-    gn.style.fontFamily = 'Creepster'
-    gn.style.fontSize = "40px"
+    gn.textContent = `Ghost Nation`
+    gn.style.fontSize = "10px"
+    gn.style.color = "green"
+
+    
 }
 
 // define dims for stream, video tag on loading stream, and canvas
