@@ -21,9 +21,12 @@ if ( ( window.innerWidth > 800 ) && ( window.innerHeight > 600)) {
     gn.style.fontSize = "30px"
 }
 
+const VIDEO_AND_CANVAS_WIDTH  = 250
+const VIDEO_AND_CANVAS_HEIGHT = 180
+
 // remove/add  video stream by removing/adding 4 changes
 // video: **1of4** - get camera stream
-navigator.webkitGetUserMedia({video:true, audio:false}, (stream)=>{
+navigator.webkitGetUserMedia({video:{width:VIDEO_AND_CANVAS_WIDTH, height:VIDEO_AND_CANVAS_HEIGHT}, audio:false}, (stream)=>{
     // if streamed, do same as text chat but with minor changes
     // or catch error
 
@@ -223,10 +226,18 @@ function dispSegmentationOnCanvas(canvasId, videoId) {
 
     // initiall will be zero. so resize!
     // video.videoWidth not working
-    webcamCanvas.width = 300;
-    webcamCanvas.height = 200;
-    videoRenderCanvas.width = 300;
-    videoRenderCanvas.height = 200;
+    if (video.srcObject.getVideoTracks()[0].getSettings().width === undefined){
+        webcamCanvas.width = VIDEO_AND_CANVAS_WIDTH;
+        webcamCanvas.height = VIDEO_AND_CANVAS_HEIGHT;
+        videoRenderCanvas.width = VIDEO_AND_CANVAS_WIDTH;
+        videoRenderCanvas.height = VIDEO_AND_CANVAS_HEIGHT;      
+    } else {
+        webcamCanvas.width = video.srcObject.getVideoTracks()[0].getSettings().width;
+        webcamCanvas.height = video.srcObject.getVideoTracks()[0].getSettings().height;
+        videoRenderCanvas.width = video.srcObject.getVideoTracks()[0].getSettings().width;
+        videoRenderCanvas.height = video.srcObject.getVideoTracks()[0].getSettings().height;
+    }
+
 
     var previousSegmentationComplete = true;
     // This function will repeatidly call itself when the browser is ready to process
