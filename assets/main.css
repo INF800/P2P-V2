@@ -202,6 +202,8 @@ input[type="file"] {
     height: 30px;
     border-radius: 5px;
     display: inline-block;
-    padding: 6px 12px;
+    /*padding: 6px 12px;*/
+    height: 44px;
+    padding-top: 3%;
     cursor: pointer;
 }
