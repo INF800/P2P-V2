@@ -33,7 +33,7 @@ navigator.webkitGetUserMedia({video:{width:VIDEO_AND_CANVAS_WIDTH, height:VIDEO_
     // ========================================================================
     // connection
     // ========================================================================
-    var Peer = require('simple-peer')
+    var Peer = require('simple-peer') // can do with min.js too
     const p = new Peer({
         initiator: location.hash === '#init', // know who is initiating con
         trickle: false,
@@ -73,9 +73,39 @@ navigator.webkitGetUserMedia({video:{width:VIDEO_AND_CANVAS_WIDTH, height:VIDEO_
         document.getElementById('logs').textContent = "YOU: " + yourMsg + "\n" + document.getElementById('logs').textContent
     })
 
-    // display sent messages in `logs`
+    // display sent messages in `logs` or download binary
+    var fileChunks = []
     p.on('data', (data)=>{
-        document.getElementById('logs').textContent = "MESSAGE: " + data + "\n" + document.getElementById('logs').textContent
+        
+        // Note: This block will NOT execute on sender's tab/browser.
+        // will be executed in reciever's tab/browser
+
+        // check text/binary using size of data.toString()
+        // Simple logic that we dont text more than 25 letters.
+        // This logic may cause issues for transfering very very small files
+        if (data.toString().length < 25){
+            // 1. text
+            document.getElementById('logs').textContent = "MESSAGE: " + data + "\n" + document.getElementById('logs').textContent
+        } else {
+            // 2.Binary. Download
+            // fileChunks is global
+            if (data.toString().includes('<<*******Transmission-Succcess********')) {
+                
+                // filename.ext is first value separated by `<<`
+                var localfileNameWithExtension = data.toString().split("<<")[0]
+
+                document.getElementById('logs').textContent = "STATUS: " + localfileNameWithExtension +" RECIEVED!" + "\n" + document.getElementById('logs').textContent
+                // Once, all the chunks are received, combine them to form a Blob
+                const file = new Blob(fileChunks);
+                fileChunks = [] // empty the container after use
+                // Download the received file using downloadjs
+                download(file, localfileNameWithExtension);
+              }
+              else {
+                // Keep appending various file chunks 
+                fileChunks.push(data);
+              }
+        }
     })
 
     // ========================================================================
@@ -99,6 +129,46 @@ navigator.webkitGetUserMedia({video:{width:VIDEO_AND_CANVAS_WIDTH, height:VIDEO_
         myvideo.play()
     })
 
+
+    // ========================================================================
+    // transfer file
+    // ========================================================================
+    // sender
+    const input = document.getElementById('file-input');
+    input.addEventListener('change', () => {
+        const file = input.files[0]; // get file props
+        const fileNameWithExtension = input.files[0].name // get file name
+        console.log('Sending', file, fileNameWithExtension)
+        document.getElementById('logs').textContent = "STATUS: " + "SENDING " + fileNameWithExtension + " ..." + "\n" + document.getElementById('logs').textContent
+
+        // We convert the file from Blob to ArrayBuffer, since some browsers don't work with blobs
+
+        file.arrayBuffer()
+        .then(buffer => {
+          // chunkSize (in Bytes) is set here 16KB
+          const chunkSize = 16 * 1024;
+    
+          // Keep chunking, and sending the chunks to the other peer
+          while(buffer.byteLength) {
+            const chunk = buffer.slice(0, chunkSize);
+            buffer = buffer.slice(chunkSize, buffer.byteLength); 
+            // Off goes the chunk!
+            p.send(chunk);
+          }
+          // End message to signal that all chunks have been sent
+          // this notification text must be >25 letter because of our
+          // plain&simple logic used in reception. So that it doesnot
+          // go into message logs 
+          p.send(fileNameWithExtension + '<<*******Transmission-Succcess********');
+          document.getElementById('logs').textContent = "STATUS: " + "SENT! (" + fileNameWithExtension + ")" + "\n" + document.getElementById('logs').textContent
+        });
+
+    });
+    // reciever implemented in if-case of  
+    // p.on('data') section above. Check binary reception
+    
+
+
 }, (err)=>{
     // video: **4of4** -
     // catch error if not allowed to stream
@@ -112,6 +182,7 @@ navigator.webkitGetUserMedia({video:{width:VIDEO_AND_CANVAS_WIDTH, height:VIDEO_
 /* --------------[Pose Net]----------------------------*/
 /* ----------------------------------------------------*/
 
+// CONFIGURE BODYPIX
 const bodyPixProperties = {
     architecture: 'MobileNetV1',
     outputStride: 16,
@@ -185,6 +256,7 @@ model = bodyPix.load(bodyPixProperties).then(function (loadedModel) {
   console.log("Model Loaded!")
 });
 
+// USE BODYPIX
 function dispSegmentationOnCanvas(canvasId, videoId) {
     
     // A function to render returned segmentation data to a given canvas context.

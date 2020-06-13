@@ -109,7 +109,7 @@ td {
     border-bottom: 1px solid #eeeeec;
 }
 
-/* INLINE */
+/* GHOST NATION */
 /* =================== */
 
 #heading{
@@ -183,6 +183,7 @@ input {
     font-size: 10px;
 }
 
+/* logs */
 pre {
     white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
     white-space: -pre-wrap; /* Opera */
@@ -191,4 +192,4 @@ pre {
     word-wrap: break-word; /* IE 5.5+ */
 }
 
-
+/* file transfer */

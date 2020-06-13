@@ -57,18 +57,28 @@
     <br/>
     <br/>
 
-    <!-- messaging -->
+    <!-- input -->
     <div class="container">
         <div class="row">
-          <div class="ten columns">
-            <input id="yourMsg" placeholder="write your message here ...">
+          <!-- messaging -->
+          <div class="nine columns">
+            <div class="ten columns">
+              <input id="yourMsg" maxlength = "24" placeholder="write your message here ...">
+            </div>
+            <div class="two columns">
+              <button id="send">send</button>
+            </div>
           </div>
-          <div class="two columns">
-            <button id="send">send</button>
+          <!-- file -->
+          <div class="three columns">
+            <div class="twelve columns">
+              <input id="file-input" type="file">
+            </div>
           </div>
         </div>
     </div>
     
+    <!-- logs -->
     <div class="container">
         <div class="row">
             <pre id="logs"></pre>
@@ -77,6 +87,9 @@
 
     <!-- for bodypix -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+    <!-- for downloading file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.8/download.min.js"></script>
+    
     <script src="bundle.js" charset="utf-8"></script>
   </body>
 </html>
